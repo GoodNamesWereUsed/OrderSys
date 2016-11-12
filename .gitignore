@@ -1,0 +1,4 @@
+/.idea/*
+/src/OrderSys/.idea/*
+/src/OrderSys/target/*
+/src/OrderSys/OrderSys.iml
