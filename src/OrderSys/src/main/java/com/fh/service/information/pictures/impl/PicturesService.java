@@ -13,8 +13,6 @@ import com.fh.util.PageData;
 
 
 /** 图片管理
- * @author chengpeng
- * 修改时间：2015.11.2
  */
 @Service("picturesService")
 public class PicturesService implements PicturesManager {

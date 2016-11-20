@@ -327,6 +327,5 @@
 		from 
 		<include refid="tableName"></include>
 	</select>
-	
-	<!-- chengpeng -->
+
 </mapper>

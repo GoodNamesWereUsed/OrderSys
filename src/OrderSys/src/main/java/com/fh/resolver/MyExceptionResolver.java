@@ -8,8 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * 
 * 类名称：MyExceptionResolver.java
-* 作者： chengpeng
-* @version 1.0
  */
 public class MyExceptionResolver implements HandlerExceptionResolver{
 

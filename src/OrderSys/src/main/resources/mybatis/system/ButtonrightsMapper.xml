@@ -85,6 +85,5 @@
 		where
 			a.ROLE_ID = #{ROLE_ID}
 	</select>
-	
-	<!-- chengpeng -->
+
 </mapper>

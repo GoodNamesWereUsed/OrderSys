@@ -37,9 +37,6 @@ import com.fh.util.Tools;
 /**
  * 
 * 类名称：分页插件
-* 作者： chengpeng
-* 修改时间：2016年2月1日
-* @version 1.0
  */
 @Intercepts({@Signature(type=StatementHandler.class,method="prepare",args={Connection.class})})
 public class PagePlugin implements Interceptor {

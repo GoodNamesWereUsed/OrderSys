@@ -43,9 +43,6 @@ import com.fh.util.Tools;
 
 /** 
  * 类名称：UserController
- * 创建人：chengpeng
- * 更新时间：2015年11月3日
- * @version
  */
 @Controller
 @RequestMapping(value="/user")

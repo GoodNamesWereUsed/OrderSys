@@ -7,9 +7,6 @@ import com.fh.util.PageData;
 
 /** 
  * 类名称：代码生成器接口类
- * 创建人：chengpeng
- * 修改时间：2015年11月24日
- * @version
  */
 public interface CreateCodeManager {
 	

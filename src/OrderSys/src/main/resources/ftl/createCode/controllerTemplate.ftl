@@ -27,8 +27,6 @@ import com.fh.service.${packageName}.${objectNameLower}.${objectName}Manager;
 
 /** 
  * 说明：${TITLE}
- * 创建人：chengpeng
- * 创建时间：${nowDate?string("yyyy-MM-dd")}
  */
 @Controller
 @RequestMapping(value="/${objectNameLower}")

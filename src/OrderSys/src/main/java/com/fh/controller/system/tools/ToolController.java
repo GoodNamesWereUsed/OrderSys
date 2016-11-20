@@ -19,9 +19,6 @@ import com.fh.util.PathUtil;
 
 /** 
  * 类名称：ToolController 系统工具
- * 创建人：chengpeng
- * 修改时间：2015年11月23日
- * @version
  */
 @Controller
 @RequestMapping(value="/tool")

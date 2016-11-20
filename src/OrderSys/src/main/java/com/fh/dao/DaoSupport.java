@@ -9,10 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-/**
- * @author chengpeng
- * 修改时间：2015、12、11
- */
+
 @Repository("daoSupport")
 public class DaoSupport implements DAO {
 

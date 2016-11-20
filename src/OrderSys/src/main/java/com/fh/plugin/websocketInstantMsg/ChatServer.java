@@ -16,8 +16,6 @@ import org.java_websocket.server.WebSocketServer;
 
 /**
  * 即时通讯
- * chengpeng
- * 2015-5-16
  */
 public class ChatServer extends WebSocketServer{
 

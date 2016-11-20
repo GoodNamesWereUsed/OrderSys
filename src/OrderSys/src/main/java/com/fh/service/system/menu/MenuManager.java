@@ -7,7 +7,6 @@ import com.fh.util.PageData;
 
 
 /**说明：MenuService 菜单处理接口
- * chengpeng
  */
 public interface MenuManager {
 
