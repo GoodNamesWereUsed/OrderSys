@@ -6,8 +6,6 @@ import com.fh.util.Tools;
 
 /**
  * 分页类
- * @author chengpeng
- * 创建时间：2014年6月28日
  */
 public class Page {
 	

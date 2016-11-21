@@ -178,7 +178,6 @@ public class DbFH{
 	}
 
 	/**用于执行某表的备份(内部类)线程
-	 * chengpengQ 3 135 9 67 90
 	 * Callable 有返回值的线程接口
 	 */
 	class DbBackUpCallable implements Callable<Object>{

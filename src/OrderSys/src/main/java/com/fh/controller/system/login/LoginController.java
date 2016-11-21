@@ -39,8 +39,6 @@ import com.fh.util.RightsHelper;
 import com.fh.util.Tools;
 /**
  * 总入口
- * @author chengpeng
- * 修改日期：2015/11/2
  */
 @Controller
 public class LoginController extends BaseController {

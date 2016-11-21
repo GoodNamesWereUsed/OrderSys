@@ -65,7 +65,6 @@ public class DateUtil {
 	* @param e
 	* @return boolean  
 	* @throws
-	* chengpeng
 	 */
 	public static boolean compareDate(String s, String e) {
 		if(fomatDate(s)==null||fomatDate(e)==null){

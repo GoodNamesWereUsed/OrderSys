@@ -101,6 +101,5 @@
                  #{item}
 		</foreach>
 	</delete>
-	
-	<!-- chengpeng -->
+
 </mapper>

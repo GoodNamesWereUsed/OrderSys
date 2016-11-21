@@ -12,10 +12,7 @@ import com.fh.util.Logger;
 import com.fh.util.PageData;
 import com.fh.util.UuidUtil;
 
-/**
- * @author chengpeng
- * 修改时间：2015、12、11
- */
+
 public class BaseController {
 	
 	protected Logger logger = Logger.getLogger(this.getClass());

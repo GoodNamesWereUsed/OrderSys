@@ -13,8 +13,6 @@ import com.fh.util.PageData;
 
 
 /**类名称：AppuserService
- * @author chengpeng
- * 修改时间：2015年11月6日
  */
 @Service("appuserService")
 public class AppuserService implements AppuserManager{

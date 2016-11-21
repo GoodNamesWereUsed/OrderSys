@@ -138,6 +138,5 @@
 		set CHA_QX=#{value} 
 		where ROLE_ID=#{ROLE_ID}
 	</update>
-	
-	<!-- chengpeng -->
+
 </mapper>

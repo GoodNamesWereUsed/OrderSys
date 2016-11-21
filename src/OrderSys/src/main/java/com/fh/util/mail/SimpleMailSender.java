@@ -17,8 +17,7 @@ import javax.mail.internet.MimeMultipart;
 import com.fh.controller.base.BaseController;
 
 /**   
- * 邮件发送器   
- * @author chengpeng
+ * 邮件发送器
  */    
 public class SimpleMailSender extends BaseController {    
 /**   

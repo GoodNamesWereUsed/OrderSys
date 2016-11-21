@@ -13,9 +13,6 @@ import com.fh.util.PageData;
 
 /** 
  * 类名称：MenuService 菜单处理
- * 创建人：chengpeng
- * 修改时间：2015年10月27日
- * @version v2
  */
 @Service("menuService")
 public class MenuService implements MenuManager{

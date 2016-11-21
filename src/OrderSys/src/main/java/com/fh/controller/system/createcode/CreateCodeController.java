@@ -30,9 +30,6 @@ import com.fh.util.PathUtil;
 
 /** 
  * 类名称： 代码生成器
- * 创建人：chengpeng
- * 修改时间：2015年11月23日
- * @version
  */
 @Controller
 @RequestMapping(value="/createCode")

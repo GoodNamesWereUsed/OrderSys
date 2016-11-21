@@ -104,6 +104,5 @@
                  ${r"#{item}"}
 		</foreach>
 	</delete>
-	
-	<!-- chengpeng -->
+
 </mapper>

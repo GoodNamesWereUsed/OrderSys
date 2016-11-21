@@ -25,9 +25,6 @@ import com.fh.util.PageData;
 import com.fh.util.RightsHelper;
 /** 
  * 类名称：MenuController 菜单处理
- * 创建人：chengpeng 
- * 创建时间：2015年10月27日
- * @version
  */
 @Controller
 @RequestMapping(value="/menu")

@@ -1,4 +1,4 @@
-//创建人： chengpeng
+
 jQuery(function()
 {
     $ = jQuery ;
