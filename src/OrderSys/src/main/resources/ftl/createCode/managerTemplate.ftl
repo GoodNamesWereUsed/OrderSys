@@ -1,13 +1,11 @@
-package com.fh.service.${packageName}.${objectNameLower};
+package com.ordersys.service.${packageName}.${objectNameLower};
 
 import java.util.List;
-import com.fh.entity.Page;
-import com.fh.util.PageData;
+import com.ordersys.entity.Page;
+import com.ordersys.util.PageData;
 
 /** 
  * 说明： ${TITLE}接口
- * 创建时间：${nowDate?string("yyyy-MM-dd")}
- * @version
  */
 public interface ${objectName}Manager{
 

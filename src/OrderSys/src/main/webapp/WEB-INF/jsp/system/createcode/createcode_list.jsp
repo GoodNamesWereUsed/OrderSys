@@ -77,7 +77,7 @@
 													<td class="center">${var.TITLE}</td>
 													<td class="center">${var.PACKAGENAME}</td>
 													<td class="center">${var.OBJECTNAME}</td>
-													<td class="center">${fn:replace(var.TABLENAME, ',fh,', '')}</td>
+													<td class="center">${fn:replace(var.TABLENAME, ',ordersys,', '')}</td>
 													<td class="center">${var.CREATETIME}</td>
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">

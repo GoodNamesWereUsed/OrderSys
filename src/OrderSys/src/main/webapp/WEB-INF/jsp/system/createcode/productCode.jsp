@@ -106,7 +106,7 @@
 							<tr>
 								<td style="width:76px;text-align: right;">上级包名：</td>
 								<td colspan="1"><input type="text" name="packageName" id="packageName" value="${pd.PACKAGENAME }" placeholder="这里输入包名  (请不要输入特殊字符,请用纯字母)" style="width:370px" title="包名称"/></td>
-								<td>&nbsp;&nbsp;例如:com.fh.controller.<font color="red" style="font-weight: bold;">system</font>&nbsp;&nbsp;只输入红色部分</td>
+								<td>&nbsp;&nbsp;例如:com.ordersys.controller.<font color="red" style="font-weight: bold;">system</font>&nbsp;&nbsp;只输入红色部分</td>
 							</tr>
 						</table>
 						<table style="margin-top: 5px;">
@@ -115,7 +115,7 @@
 								<td><input type="text" name="objectName" id="objectName" value="${pd.OBJECTNAME }" placeholder="这里输入处理类名称" style="width:200px" title="类名称"/></td>
 								<td>&nbsp;&nbsp;<font color="red" style="font-weight: bold;">类名首字母必须为大写字母或下划线</font></td>
 								<td style="width:76px;text-align: right;">表前缀：</td>
-								<td><input type="text" name="tabletop" id="tabletop" value="${msg == 'add' ? 'TB_' : ''}${fn:split(pd.TABLENAME, ',fh,')[0]}" placeholder="这里输入表前缀" style="width:156px" title="表前缀"/></td>
+								<td><input type="text" name="tabletop" id="tabletop" value="${msg == 'add' ? 'TB_' : ''}${fn:split(pd.TABLENAME, ',ordersys,')[0]}" placeholder="这里输入表前缀" style="width:156px" title="表前缀"/></td>
 							</tr>
 						</table>
 						

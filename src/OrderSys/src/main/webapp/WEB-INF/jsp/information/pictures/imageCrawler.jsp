@@ -159,7 +159,7 @@
 									'<a href="'+imgPath+'" data-rel="colorbox" class="cboxElement">'+
 										'<img width="150" height="150" alt="150x150" src="'+imgPath+'" />'+
 										'<div class="text">'+
-											'<div class="inner">FH</div>'+
+											'<div class="inner">OrderSys</div>'+
 										'</div>'+
 									'</a>'+
 								'</li>'
