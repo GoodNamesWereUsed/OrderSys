@@ -93,7 +93,7 @@ public class CreateCodeController extends BaseController {
 		}
 		List<String[]> fieldList = new ArrayList<String[]>();   	//属性集合			========参数4
 		for(int i=0; i< zindex; i++){
-			fieldList.add(pd.getString("field"+i).split(",ordersys,"));	//属性放到集合里面
+			fieldList.add(pd.getString("field"+i).split(",fh,"));	//属性放到集合里面
 		}
 		Map<String,Object> root = new HashMap<String,Object>();		//创建数据模型
 		root.put("fieldList", fieldList);
@@ -152,7 +152,7 @@ public class CreateCodeController extends BaseController {
 	public void save(PageData pd) throws Exception{
 		pd.put("PACKAGENAME", pd.getString("packageName"));	//包名
 		pd.put("OBJECTNAME", pd.getString("objectName"));	//类名
-		pd.put("TABLENAME", pd.getString("tabletop")+",ordersys,"+pd.getString("objectName").toUpperCase());	//表名
+		pd.put("TABLENAME", pd.getString("tabletop")+",fh,"+pd.getString("objectName").toUpperCase());	//表名
 		pd.put("FIELDLIST", pd.getString("FIELDLIST"));		//属性集合
 		pd.put("CREATETIME", DateUtil.getTime());			//创建时间
 		pd.put("TITLE", pd.getString("TITLE"));				//说明
