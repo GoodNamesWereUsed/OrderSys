@@ -1,0 +1,65 @@
+.c-notice {
+	font-size: 16px;
+	line-height: 30px;
+	text-algin: center;
+	border: 1px solid #ababab;
+	text-align: left;
+	/* 让新闻内容靠左 */
+	*zoom: 1;
+	padding: 10px 20px;
+}
+
+.c-notice:after {
+	display: block;
+	content: "clear";
+	height: 0;
+	clear: both;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+.cn-title {
+	float: left;
+	font-size: 20px;
+}
+
+.cn-title a {
+	color: #f00;
+}
+
+.cn-msg {
+	height: 30px;
+	overflow: hidden;
+	/*  这个一定要加，超出的内容部分要隐藏，免得撑高中间部分 */
+}
+
+.c-notice a img {
+	border: none;
+	/*  超链接下，图片的边框  */
+}
+
+.c-notice a {
+	color: #333;
+	text-decoration: none;
+	/* 超链接样式 */
+}
+
+.c-notice a:hover {
+	color: #ff0000;
+}
+
+.c-notice ul li {
+	height: 30px;
+}
+
+.c-notice ul li a {
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-indent: 15px;
+}
+
+.c-notice ul li span {
+	float: right;
+	color: #999;
+}
