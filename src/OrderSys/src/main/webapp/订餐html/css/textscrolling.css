@@ -2,7 +2,6 @@
 	font-size: 16px;
 	line-height: 30px;
 	text-algin: center;
-	border: 1px solid #ababab;
 	text-align: left;
 	/* 让新闻内容靠左 */
 	*zoom: 1;
@@ -20,11 +19,12 @@
 
 .cn-title {
 	float: left;
-	font-size: 20px;
+	font-size: 26px;
 }
 
 .cn-title a {
 	color: #f00;
+	text-decoration: none;
 }
 
 .cn-msg {
@@ -33,15 +33,19 @@
 	/*  这个一定要加，超出的内容部分要隐藏，免得撑高中间部分 */
 }
 
+.cn-msg ul {
+	margin: 0;
+}
+
 .c-notice a img {
 	border: none;
 	/*  超链接下，图片的边框  */
 }
 
-.c-notice a {
+.c-notice ul a {
 	color: #333;
 	text-decoration: none;
-	/* 超链接样式 */
+	line-height: 30px;
 }
 
 .c-notice a:hover {
@@ -50,6 +54,7 @@
 
 .c-notice ul li {
 	height: 30px;
+	overflow: hidden;
 }
 
 .c-notice ul li a {
@@ -57,9 +62,15 @@
 	display: block;
 	overflow: hidden;
 	text-indent: 15px;
+	height: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 100%;
 }
 
 .c-notice ul li span {
 	float: right;
 	color: #999;
+	line-height: 30px;
 }

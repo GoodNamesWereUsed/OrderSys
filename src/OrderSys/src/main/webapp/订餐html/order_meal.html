@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/reset1.1.css" />
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+
+		<style>
+			#order_meal .c-left {
+				width: 200px;
+				float: left;
+				position: fixed;
+			}
+
+			#order_meal .c-right {
+				margin-bottom: 90px;
+				margin-left: 200px;
+				overflow: auto;
+				height: 400px;
+			}
+
+			.c-left ul {
+				margin: 0;
+				background-color: #fff;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+				border-radius: 6px;
+				-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+				-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+				box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+			}
+
+			.c-left a {
+				font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+				display: inline-block;
+				width: 100%;
+				box-sizing: border-box;
+				padding: 5px;
+				border: 1px solid #e5e5e5;
+				border-top: 0;
+				text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+			}
+
+			.c-left li:first-child a {
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+				border-top: 1px solid #e5e5e5;
+			}
+
+			.c-left li:last-child a {
+				border-bottom-left-radius: 6px;
+				border-bottom-right-radius: 6px;
+			}
+
+			.c-left a:hover {
+				text-decoration: none;
+				background-color: #f5f5f5;
+			}
+
+			.c-left .icon-chevron-right {
+				float: right;
+				color: #FFFF00;
+				overflow: auto;
+			}
+
+			.c-left li.active a {
+				color: #fff;
+				border-color: #08c;
+				background-color: #08c;
+			}
+
+			.c-right li.food {
+				width: 200px;
+				margin: 20px;
+				float: left;
+			}
+
+			.c-right .food:first-child {
+				margin-left: 20px;
+			}
+
+			.c-right .food p {
+				margin: 0;
+				padding: 5px;
+			}
+
+			.c-right .food .food-img {
+				width: 200px;
+				height: 200px;
+				background-color: #eee;
+				background-size: cover;
+				background-position: center;
+				/*引入插件兼容IE8*/
+				-ms-behavior: url(vendor/backgroundsize.htc);
+				behavior: url(vendor/backgroundsize.htc);
+			}
+
+			.num {
+				height: 30px;
+				line-height: 30px;
+				vertical-align: baseline;
+				padding: 5px;
+			}
+
+			.num input {
+				float: right;
+				outline: none;
+			}
+
+			.num input[type=number] {
+				-moz-appearance: textfield;
+				/*不显示三角形*/
+			}
+
+			.num input[type=number]::-webkit-inner-spin-button,
+			.num input[type=number]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
+			.num input[type='button'] {
+				width: 30px;
+				height: 30px;
+				line-height: 20px;
+				border-radius: 50%;
+				font-size: 20px;
+				cursor: pointer;
+				border: 1px solid transparent;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				color: #666;
+				background-color: #fff;
+				border-color: #B2B2B2;
+				outline: none;
+			}
+
+			.num input[type='button']:hover {
+				background-color: #fff;
+			}
+
+			.num input[type='button']:active {
+				background-color: #fff;
+				background-color: #d4d4d4;
+				;
+			}
+
+			.num input[type='number'],
+			.num input[type='text'] {
+				height: 20px;
+				width: 20px;
+				margin: 0;
+				text-align: center;
+			}
+
+			.cr-bottom {
+				width: 100%;
+				/*position: fixed;*/
+				bottom: 0;
+				box-sizing: border-box;
+				background-color: #fff;
+				border: 1px solid #333333;
+				position: relative;
+				z-index: 3;
+			}
+
+			.cr-bottom ul,
+			.cr-bottom li {
+				margin: 0;
+				padding: 0;
+			}
+
+			.btn-shoppCart {
+				height: 60px;
+				width: 60px;
+				margin: -30px 5px 3px;
+				border-radius: 50%;
+				outline: none;
+				background-color: #F44336;
+				border: 0;
+				color: #fff;
+				font-family: "微软雅黑";
+				font-size: 16px;
+				position: relative;
+				z-index: 3;
+			}
+
+			.btn-shoppCart:hover {
+				background-color: #F55448;
+			}
+
+			.btn-shoppCart:active {
+				background-color: #DE3D31;
+			}
+
+			.btn-settle {
+				height: 50px;
+				width: 100px;
+				outline: none;
+				border: 0;
+				font-family: "微软雅黑";
+				font-size: 16px;
+				background-color: yellow;
+				float: right;
+			}
+
+			.cr-bottom .sum-money {
+				display: inline-block;
+				font-size: 20px;
+				height: 30px;
+				line-height: 30px;
+				margin: 10px 20px 0;
+			}
+
+			.have_order {
+				position: relative;
+				left: 0;
+				right: 0;
+				padding: 0px 0 0px;
+				/*display: none;*/
+				z-index: 2;
+				font-size: 16px;
+				font: "微软雅黑";
+				/*display: none;*/
+				background-color: #fff;
+			}
+
+			.ho-name {
+				margin-left: 20px;
+			}
+
+			.have_order .num input:first-child {
+				margin-right: 20px;
+			}
+
+			.ho-momey {
+				margin-left: 50px;
+			}
+
+			.mask {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0px;
+				background-color: #000000;
+				opacity: .5;
+				z-index: 1;
+				/*display: none;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="order_meal" class="clearfix">
+			<div class="c-left">
+				<ul>
+					<li class="active">
+						<a href="#"><i class="icon-chevron-right"></i>推荐</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>米饭</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>蔬菜</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>水果水果</a>
+					</li>
+					<li class="active">
+						<a href="#"><i class="icon-chevron-right"></i>米饭</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>蔬菜</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>水果</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>米饭</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>蔬菜</a>
+					</li>
+					<li>
+						<a href="#"><i class="icon-chevron-right"></i>水果</a>
+					</li>
+
+				</ul>
+			</div>
+			<!--c-left结束-->
+			<div class="c-right clearfix">
+				<ul>
+					<li class="food">
+						<div class="food-img" style="background-image: url(temp/img/test.jpg);"></div>
+						<p class="food-name">白饭</p>
+						<div class="foot-bottom num">价格:￥<span class="food-price">50</span>
+							<input type="button" value="+" />
+							<input type="number" value="0" />
+							<input type="button" value="-" />
+						</div>
+					</li>
+					<li class="food">
+						<div class="food-img" style="background-image: url(temp/img/test.jpg);"></div>
+						<p class="food-name">白饭</p>
+						<div class="foot-bottom num">价格:￥<span class="food-price">50</span>
+							<input type="button" value="+" />
+							<input type="number" value="0" />
+							<input type="button" value="-" />
+						</div>
+					</li>
+					<li class="food">
+						<div class="food-img" style="background-image: url(temp/img/test.jpg);"></div>
+						<p class="food-name">白饭</p>
+						<div class="foot-bottom num">价格:￥<span class="food-price">50</span>
+							<input type="button" value="+" />
+							<input type="number" value="0" />
+							<input type="button" value="-" />
+						</div>
+					</li>
+					<li class="food">
+						<div class="food-img" style="background-image: url(temp/img/test.jpg);"></div>
+						<p class="food-name">白饭</p>
+						<div class="foot-bottom num">价格:￥<span class="food-price">50</span>
+							<input type="button" value="+" />
+							<input type="number" value="0" />
+							<input type="button" value="-" />
+						</div>
+					</li>
+					<li class="food">
+						<div class="food-img" style="background-image: url(temp/img/test.jpg);"></div>
+						<p class="food-name">白饭</p>
+						<div class="foot-bottom num">价格:￥<span class="food-price">50</span>
+							<input type="button" value="+" />
+							<input type="number" value="0" />
+							<input type="button" value="-" />
+						</div>
+					</li>
+					<li class="food">
+						<div class="food-img" style="background-image: url(temp/img/test.jpg);"></div>
+						<p class="food-name">白饭</p>
+						<div class="foot-bottom num">价格:￥<span class="food-price">50</span>
+							<input type="button" value="+" />
+							<input type="number" value="0" />
+							<input type="button" value="-" />
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--c-right结束-->
+			<div class="cr-bottom clearfix">
+				<button class="btn-shoppCart">购物车</button>
+				<div class="have_order">
+					<ul>
+						<li>
+							<p>
+								<span class="ho-name">白饭</span>
+								<span class="ho-momey">价格：￥50</span>
+								<span class="num">
+									<input type="button" value="+" />
+									<input type="number" value="0" />
+									<input type="button" value="-" />
+								</span>
+							</p>
+						</li>
+						<li>
+							<p>
+								<span class="ho-name">白饭</span>
+								<span class="ho-momey">价格：￥50</span>
+								<span class="num">
+									<input type="button" value="+" />
+									<input type="number" value="0" />
+									<input type="button" value="-" />
+								</span>
+							</p>
+						</li>
+						<li>
+							<p>
+								<span class="ho-name">白饭</span>
+								<span class="ho-momey">价格：￥50</span>
+								<span class="num">
+									<input type="button" value="+" />
+									<input type="number" value="0" />
+									<input type="button" value="-" />
+								</span>
+							</p>
+						</li>
+						<li>
+							<p>
+								<span class="ho-name">白饭</span>
+								<span class="ho-momey">价格：￥50</span>
+								<span class="num">
+									<input type="button" value="+" />
+									<input type="number" value="0" />
+									<input type="button" value="-" />
+								</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<span class="sum-money">总金额：￥500</span>
+				<button class="btn-settle">去结算</button>
+			</div>
+			<div class="mask"></div>
+		</div>
+	</body>
+
+</html>
