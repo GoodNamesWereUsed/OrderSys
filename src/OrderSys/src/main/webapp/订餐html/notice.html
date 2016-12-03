@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>公告</title>
+		<link rel="stylesheet" href="css/reset1.1.css" />
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/textscrolling.css" />
+		<link rel="stylesheet" href="notice.css" />
+	</head>
+
+	<body>
+		<div class="title">
+			<a href="index.html" class="comeback">返回</a>
+			<h1>公告</h1>
+		</div>
+		<div class="content">
+			<div class="c-notice">
+				<div class="cn-msg">
+					<ul class="con1">
+
+						<li>
+							<a href="notice_detail.html">1.学会html5 绝对的屌丝逆袭（案例）<span>2013-09-18</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">2.tab页面切换效果（案例）<span>2013-10-09</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">3.圆角水晶按钮制作（案例）<span>2013-10-21</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">1.学会html5 绝对的屌丝逆袭（案例）<span>2013-09-18</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">2.tab页面切换效果（案例）<span>2013-10-09</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">3.圆角水晶按钮制作（案例）<span>2013-10-21</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">1.学会html5 绝对的屌丝逆袭（案例）<span>2013-09-18</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">2.tab页面切换效果（案例）<span>2013-10-09</span></a>
+						</li>
+						<li>
+							<a href="notice_detail.html">3.圆角水晶按钮制作（案例）<span>2013-10-21</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="pagination">
+				<ul>
+					<li>
+						<a href="#">Prev</a>
+					</li>
+					<li>
+						<a href="#">1</a>
+					</li>
+					<li>
+						<a href="#">2</a>
+					</li>
+					<li>
+						<a href="#">3</a>
+					</li>
+					<li>
+						<a href="#">4</a>
+					</li>
+					<li>
+						<a href="#">5</a>
+					</li>
+					<li>
+						<a href="#">Next</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery1.9.min.js"></script>
+		<script type="text/javascript">
+		/*为content设置最小高度*/
+			$('.content').css({
+				'min-height': $(window).height() - $('.title').outerHeight(true) - 25
+			})
+			$(window).resize(function() {
+				$('.content').css({
+					'min-height': $(window).height() - $('.title').outerHeight(true) - 25
+				})
+			});
+		</script>
+	</body>
+
+</html>

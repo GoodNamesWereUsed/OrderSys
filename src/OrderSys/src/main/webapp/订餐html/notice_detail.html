@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>公告</title>
+		<link rel="stylesheet" href="css/reset1.1.css" />
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/textscrolling.css" />
+		<link rel="stylesheet" href="notice.css" />
+		<style type="text/css">
+			.title h1 {
+				font-size: 35px;
+			}
+
+			.cn-msg p {
+				text-indent: 2em;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="title">
+			<a href="javascript:;" class="comeback">返回</a>
+			<h1>详细公告名称</h1>
+		</div>
+		<div class="content">
+			<div class="c-notice">
+				<div class="cn-msg">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id quo ea praesentium dolorum est molestias consequuntur totam magnam harum odit modi ipsum similique qui repellendus laboriosam at porro numquam quisquam. ipsum dolor sit amet, consectetur adipisicing elit. Vero quis earum facilis molestiae distinctio quasi deserunt fuga sed optio illo! Quisquam enim excepturi expedita voluptate maxime perspiciatis natus fugiat eaque. ipsum dolor sit amet, consectetur adipisicing elit. Voluptate minima nulla iusto molestias odio asperiores maxime cum distinctio dolores est repellendus quo quaerat repellat consectetur at accusamus ullam similique debitis.
+					</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery1.9.min.js"></script>
+		<script type="text/javascript">
+		/*为content设置最小高度*/
+			$('.content').css({
+				'min-height': $(window).height() - $('.title').outerHeight(true) - 25
+			})
+			$(window).resize(function() {
+				$('.content').css({
+					'min-height': $(window).height() - $('.title').outerHeight(true) - 25
+				})
+			});
+			/*添加返回功能*/
+			$('.comeback').on('click',function(){
+				window.history.back();
+			});
+		</script>
+	</body>
+
+</html>
