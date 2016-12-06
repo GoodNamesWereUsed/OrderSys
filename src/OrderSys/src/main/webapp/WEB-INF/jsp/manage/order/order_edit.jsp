@@ -33,29 +33,48 @@
 						<table id="table_report" class="table table-striped table-bordered table-hover">
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">餐桌号:</td>
-								<td><input type="text" name="TABLE_ID" id="TABLE_ID" value="${pd.TABLE_ID}" maxlength="255" placeholder="这里输入餐桌号" title="餐桌号" style="width:98%;"/></td>
+								<td>
+									<select name="TABLE_ID" id="TABLE_ID">
+										<c:if test="${msg =='save'}">
+											<option disabled selected hidden>---请选择餐桌---</option>
+										</c:if>
+										<c:forEach var="var" items="${tableList}">
+											<option value="${var.TABLE_ID}">${var.TABLE_NUM}</option>
+										</c:forEach>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">订单状态:</td>
-								<td><input type="number" name="ORDER_STATUS" id="ORDER_STATUS" value="${pd.ORDER_STATUS}" maxlength="32" placeholder="这里输入订单状态" title="订单状态" style="width:98%;"/></td>
+								<td>
+									<select name="ORDER_STATUS" id="ORDER_STATUS">
+										<option value="0" selected>未完成</option>
+										<option value="1">已完成</option>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">用餐人数:</td>
-								<td><input type="number" name="PERSON_NUM" id="PERSON_NUM" value="${pd.PERSON_NUM}" maxlength="32" placeholder="这里输入用餐人数" title="用餐人数" style="width:98%;"/></td>
+								<td><input max="20" min="0" type="number" name="PERSON_NUM" id="PERSON_NUM"
+										   value="${pd.PERSON_NUM}" maxlength="32" placeholder="这里输入用餐人数" title="用餐人数"
+										   style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">员工编号:</td>
 								<td><input type="text" name="WAITER_ID" id="WAITER_ID" value="${pd.WAITER_ID}" maxlength="255" placeholder="这里输入员工编号" title="员工编号" style="width:98%;"/></td>
 							</tr>
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">折扣:</td>
-								<td><input type="text" name="DISCOUNT" id="DISCOUNT" value="${pd.DISCOUNT}" maxlength="255" placeholder="这里输入折扣" title="折扣" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">折扣(%):</td>
+								<td><input max="100" min="0" type="number" name="DISCOUNT" id="DISCOUNT"
+										   value="${pd.DISCOUNT}" maxlength="255" placeholder="这里输入折扣" title="折扣"
+										   style="width:98%;"/></td>
 							</tr>
 							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">订单原价:</td>
-								<td><input type="text" name="ORDER_PRICE" id="ORDER_PRICE" value="${pd.ORDER_PRICE}" maxlength="255" placeholder="这里输入订单原价" title="订单原价" style="width:98%;"/></td>
+								<td><input type="number" name="ORDER_PRICE" id="ORDER_PRICE" value="${pd.ORDER_PRICE}"
+										   maxlength="255" placeholder="这里输入订单原价" title="订单原价" style="width:98%;"/></td>
 							</tr>
-							<tr>
+							<tr hidden>
 								<td style="width:75px;text-align: right;padding-top: 13px;">添加时间:</td>
 								<td><input class="span10 date-picker" name="ADD_TIME" id="ADD_TIME" value="${pd.ADD_TIME}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="添加时间" title="添加时间" style="width:98%;"/></td>
 							</tr>
@@ -92,6 +111,12 @@
 	<script type="text/javascript" src="static/js/jquery.tips.js"></script>
 		<script type="text/javascript">
 		$(top.hangge());
+
+		$('#ORDER_PRICE').blur(function () {
+			var money = $(this).val() - 0.0;
+			$(this).val(money.toFixed(2));
+		});
+
 		//保存
 		function save(){
 			if($("#TABLE_ID").val()==""){

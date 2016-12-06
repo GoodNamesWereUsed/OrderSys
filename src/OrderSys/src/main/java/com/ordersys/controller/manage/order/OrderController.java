@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
+import com.ordersys.service.manage.table.TableManager;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -35,6 +37,8 @@ public class OrderController extends BaseController {
 	String menuUrl = "order/list.do"; //菜单地址(权限用)
 	@Resource(name="orderService")
 	private OrderManager orderService;
+	@Resource(name = "tableService")
+	private TableManager tableService;
 	
 	/**保存
 	 * @param
@@ -45,6 +49,7 @@ public class OrderController extends BaseController {
 		logBefore(logger, Jurisdiction.getUsername()+"新增Order");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
+		Page page = this.getPage();
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.put("ORDER_ID", this.get32UUID());	//主键
@@ -118,12 +123,18 @@ public class OrderController extends BaseController {
 	public ModelAndView goAdd()throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
+		Page page = this.getPage();
 		mv.setViewName("manage/order/order_edit");
 		mv.addObject("msg", "save");
 		mv.addObject("pd", pd);
+		List<PageData> tableList = getAllTable(page);
+		mv.addObject("tableList", tableList);
 		return mv;
-	}	
+	}
+
+	private List<PageData> getAllTable(Page page) throws Exception {
+		return tableService.list(page);
+	}
 	
 	 /**去修改页面
 	 * @param
@@ -132,12 +143,15 @@ public class OrderController extends BaseController {
 	@RequestMapping(value="/goEdit")
 	public ModelAndView goEdit()throws Exception{
 		ModelAndView mv = this.getModelAndView();
+		Page page = this.getPage();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd = orderService.findById(pd);	//根据ID读取
+		pd = orderService.findById(pd);    //根据ID读sd取
 		mv.setViewName("manage/order/order_edit");
 		mv.addObject("msg", "edit");
 		mv.addObject("pd", pd);
+		List<PageData> tableList = getAllTable(page);
+		mv.addObject("tableList", tableList);
 		return mv;
 	}	
 	

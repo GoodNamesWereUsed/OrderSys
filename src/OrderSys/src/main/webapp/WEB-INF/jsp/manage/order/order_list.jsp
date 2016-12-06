@@ -118,7 +118,14 @@
                                                     </td>
                                                     <td class='center' style="width: 30px;">${vs.index+1}</td>
                                                     <td class='center'>${var.TABLE_ID}</td>
-                                                    <td class='center'>${var.ORDER_STATUS}</td>
+                                                    <td class='center'>
+                                                        <c:if test="${var.ORDER_STATUS == '0' }">
+                                                            未完成
+                                                        </c:if>
+                                                        <c:if test="${var.ORDER_STATUS == '1' }">
+                                                            已完成
+                                                        </c:if>
+                                                    </td>
                                                     <td class='center'>${var.PERSON_NUM}</td>
                                                     <td class='center'>${var.WAITER_ID}</td>
                                                     <td class='center'>${var.DISCOUNT}</td>
