@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>服务员--订单信息</title>
+		<title>服务员--确认订单</title>
 		<link rel="stylesheet" href="css/reset1.1.css" />
 		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/textscrolling.css" />
@@ -112,23 +112,60 @@
 			.btn-submit:active {
 				background-color: #1E88DD;
 			}
+			/*数字键盘*/
 
-			table span {
-				display: inline-block;
+			.c-num_keyboard {
+				width: 200px;
+				background-color: #eee;
 				padding: 5px;
+				padding-top: 30px;
+				border: 1px solid #555;
+				position: fixed;
+				/*top: 0;*/
+				display: none;
+			}
+
+			.c-num_keyboard .c-nk-colse {
+				float: right;
+				font-size: 30px;
+				margin-top: -30px;
+				margin-right: -5px;
+				cursor: pointer;
+			}
+
+			.c-num_keyboard .c-nk-colse:hover {
+				color: red;
+			}
+
+			.c-num_keyboard input {
+				width: 192px;
+				padding: 3px;
+				outline: 0;
+				margin: 0;
+				height: 20px;
+				border-radius: 0;
+			}
+
+			.c-num_keyboard table {
+				width: 100%;
+				margin: 5px 0 0;
+			}
+
+			.c-num_keyboard td {
+				border: 1px solid #555;
+				text-align: center;
+				padding: 5px 10px;
+				cursor: pointer;
+			}
+
+			.c-num_keyboard td:hover {
+				background-color: #555;
 				color: #fff;
 			}
 
-			.m-wait {
-				background-color: #4CAF50;
-			}
-
-			.m-doing {
-				background-color: #F44336;
-			}
-
-			.m-done {
-				background-color: #2196F3;
+			.c-num_keyboard td:active {
+				background-color: #444;
+				color: #fff;
 			}
 		</style>
 	</head>
@@ -136,10 +173,10 @@
 	<body>
 		<div class="title">
 			<a href="javascript:;" class="comeback">返回</a>
-			<h1>订单信息</h1>
+			<h1>确认订单</h1>
 		</div>
 		<div class="content">
-			<p><span>桌号：<i id="num">--</i></span></p>
+			<p><span>桌号：<i id="num">--</i><button id="btn-change">修改</button></span></p>
 			<table>
 				<thead>
 					<tr>
@@ -147,7 +184,6 @@
 						<th>单价(单位：元)</th>
 						<th>数量</th>
 						<th>合计(单位：元)</th>
-						<th>状态</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -156,30 +192,54 @@
 						<td>50</td>
 						<td>1</td>
 						<td>50</td>
-						<td><span class="m-wait">等待烹制</span></td>
 					</tr>
 					<tr>
 						<td>白饭</td>
 						<td>50</td>
 						<td>1</td>
 						<td>50</td>
-						<td><span class="m-doing">正在烹制</span></td>
 					</tr>
 					<tr>
 						<td>白饭</td>
 						<td>50</td>
 						<td>1</td>
 						<td>50</td>
-						<td><span class="m-done">烹制完毕</span></td>
 					</tr>
 				</tbody>
 			</table>
 			<p>合计：<i>150</i>元</p>
 			<p>备注:</p>
-			<p>我不次辣</p>
-			<button class="btn-submit">提交付款申请</button>
+			<textarea class="textarea" name="" rows="3" cols=""></textarea>
+			<button class="btn-submit">提交/追加订单</button>
 		</div>
 
+		<!--数字键盘-->
+		<div class="c-num_keyboard">
+			<span class="c-nk-colse">&#215;</span>
+			<input id="c-i-num" type="text" placeholder="请输入" />
+			<table>
+				<tbody>
+					<tr>
+						<td class="c-num">1</td>
+						<td class="c-num">2</td>
+						<td class="c-num">3</td>
+						<td id="c-one">-</td>
+					</tr>
+					<tr>
+						<td class="c-num">4</td>
+						<td class="c-num">5</td>
+						<td class="c-num">6</td>
+						<td id="c-all">清空</td>
+					</tr>
+					<tr>
+						<td class="c-num">7</td>
+						<td class="c-num">8</td>
+						<td class="c-num">9</td>
+						<td id="c-sure">确定</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<script type="text/javascript" src="js/jquery1.9.min.js"></script>
 		<script type="text/javascript">
 			/*为content设置最小高度*/
@@ -194,6 +254,40 @@
 			/*添加返回功能*/
 			$('.comeback').on('click', function() {
 				window.history.back();
+			});
+			/*调用数字键盘*/
+			$('#btn-change').on('click', function() {
+				var XY = $('#num').offset();
+				$('#c-i-num').val('');
+				$('.c-num_keyboard').css({
+					'top': XY.top+35,
+					'left': XY.left
+				}).show();
+			});
+			/*数字键盘*/
+			$('.c-num_keyboard').find('.c-num').on('click', function() {
+				var cin = $('#c-i-num'),
+					num = cin.val();
+				cin.val(num + $(this).text());
+			});
+			$('.c-nk-colse').on('click', function() {
+				$('.c-num_keyboard').hide();
+			});
+			$('#c-one').on('click', function() {
+				var cin = $('#c-i-num'),
+					num = cin.val();
+				cin.val(num.substring(0, num.length - 1));
+			});
+			$('#c-all').on('click', function() {
+				$('#c-i-num').val('');
+			});
+			$('#c-sure').on('click', function() {
+				var val = $('#c-i-num').val();
+				if(val == '') {
+					val = '--';
+				}
+				$('#num').text(val);
+				$('.c-num_keyboard').hide();
 			});
 		</script>
 	</body>
