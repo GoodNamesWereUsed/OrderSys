@@ -5,7 +5,7 @@ body {
 .title {
 	/*max-width: 868px;*/
 	/*margin: 0 auto;*/
-	background-image: url(img/bg-notice.jpg);
+	background-image: url(../img/bg-notice.jpg);
 	background-position: center;
 	background-size: cover;
 	height: 200px;
