@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CategoriesMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		T_MENU_CATEGORIES
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		MENU_CATEGORIES_NAME,	
+		REMARKS,	
+		MENU_CATEGORIES_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{MENU_CATEGORIES_NAME},	
+		#{REMARKS},	
+		#{MENU_CATEGORIES_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where
+			MENU_CATEGORIES_ID = #{MENU_CATEGORIES_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			MENU_CATEGORIES_NAME = #{MENU_CATEGORIES_NAME},
+			REMARKS = #{REMARKS},
+		MENU_CATEGORIES_ID = MENU_CATEGORIES_ID
+		where
+		MENU_CATEGORIES_ID = #{MENU_CATEGORIES_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where
+			MENU_CATEGORIES_ID = #{MENU_CATEGORIES_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and MENU_CATEGORIES_NAME LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+		</if>
+	</select>
+
+	<!-- 查找全部的分类 -->
+	<select id="findAllCategories" parameterType="pd" resultType="pd">
+		SELECT
+		<include refid="Field"></include>
+		FROM
+		<include refid="tableName"></include>
+		WHERE 1 = 1
+	</select>
+
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where
+			MENU_CATEGORIES_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+
+</mapper>
