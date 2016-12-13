@@ -2,6 +2,7 @@ package com.ordersys.controller.information.pictures;
 
 import com.ordersys.entity.Page;
 import com.ordersys.service.information.pictures.PicturesManager;
+import com.ordersys.service.manage.picture_used_details.Picture_Used_DetailsManager;
 import com.ordersys.util.*;
 import com.ordersys.controller.base.BaseController;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,7 +33,26 @@ public class PicturesController extends BaseController {
 	String menuUrl = "pictures/list.do"; //菜单地址(权限用)
 	@Resource(name="picturesService")
 	private PicturesManager picturesService;
-	
+	@Resource(name = "picture_used_detailsService")
+	private Picture_Used_DetailsManager picture_used_detailsService;
+
+	/**
+	 * 通过 图片使用详情表 的外键 CONTENT_ID 查找相应的 图片集合
+	 *
+	 * @throws Exception
+	 * @Author huangMP
+	 */
+	@RequestMapping(value = "/getPictureList")
+	@ResponseBody
+	public List<PageData> getPictureList(String contentId) throws Exception {
+		if (!("".equals(contentId) || null == contentId)) {
+			List<PageData> pictureList = picture_used_detailsService.selectPicturesByContentId(contentId);
+			return pictureList;
+		} else {
+			return null;
+		}
+	}
+
 	/**列表
 	 * @param page
 	 * @return
@@ -63,7 +84,8 @@ public class PicturesController extends BaseController {
 	@RequestMapping(value="/save")
 	@ResponseBody
 	public Object save(
-			@RequestParam(required=false) MultipartFile file
+			@RequestParam(required = false) MultipartFile file,
+			HttpSession session
 			) throws Exception{
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		logBefore(logger, Jurisdiction.getUsername()+"新增图片");
@@ -86,6 +108,25 @@ public class PicturesController extends BaseController {
 			pd.put("BZ", "图片管理处上传");						//备注
 			Watermark.setWatemark(PathUtil.getClasspath() + Const.FILEPATHIMG + ffile + "/" + fileName);//加水印
 			picturesService.save(pd);
+
+			/**
+			 * notes start
+			 *
+			 * decription : 由于业务需求，在保存图片的同时,保存其使用详情
+			 * @Author huangMP
+			 */
+			String contentId = (String) session.getAttribute("contentId");
+			if (!("".equals(contentId) || null == contentId)) {
+				PageData pictureUsedDetails = new PageData();
+				pictureUsedDetails.put("PICTURE_USED_DETAILS_ID", this.get32UUID());
+				pictureUsedDetails.put("PICTURE_ID", pd.getString("PICTURES_ID"));
+				pictureUsedDetails.put("CONTENT_ID", contentId);
+				picture_used_detailsService.save(pictureUsedDetails);
+			}
+			/**
+			 * notes end
+			 */
+
 		}
 		map.put("result", "ok");
 		return AppUtil.returnObject(pd, map);
@@ -105,6 +146,7 @@ public class PicturesController extends BaseController {
 			DelAllFile.delFolder(PathUtil.getClasspath()+ Const.FILEPATHIMG + pd.getString("PATH")); //删除图片
 			picturesService.delete(pd);
 		}
+
 		out.write("success");
 		out.close();
 	}
@@ -161,13 +203,29 @@ public class PicturesController extends BaseController {
 	/**去新增页面
 	 * @return
 	 */
-	@RequestMapping(value="/goAdd")
-	public ModelAndView goAdd() throws Exception{
+	@RequestMapping(value = "/goAdd")
+	public ModelAndView goAdd(HttpSession session, String contentId) throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		mv.setViewName("information/pictures/pictures_add");
 		mv.addObject("pd", pd);
+
+		/**
+		 * notes start
+		 *
+		 * decription : 由于业务需求添加的图片，在保存时保存其使用详情
+		 * @param contentId 存放图片外键Id
+		 * @Author huangMP
+		 */
+		if (!("".equals(contentId) || null == contentId)) {
+			session.setAttribute("contentId", contentId);    //存放图片外键Id
+		}
+		/**
+		 * notes end
+		  */
+
+
 		return mv;
 	}
 	
@@ -204,6 +262,7 @@ public class PicturesController extends BaseController {
 			if(null != DATA_IDS && !"".equals(DATA_IDS)){
 				String ArrayDATA_IDS[] = DATA_IDS.split(",");
 				pathList = picturesService.getAllById(ArrayDATA_IDS);
+
 				for(int i=0;i<pathList.size();i++){
 					DelAllFile.delFolder(PathUtil.getClasspath()+ Const.FILEPATHIMG + pathList.get(i).getString("PATH"));//删除图片
 				}
@@ -228,9 +287,11 @@ public class PicturesController extends BaseController {
 		pd = this.getPageData();
 		String PATH = pd.getString("PATH");													 		//图片路径
 		DelAllFile.delFolder(PathUtil.getClasspath()+ Const.FILEPATHIMG + pd.getString("PATH")); 	//删除图片
+
 		if(PATH != null){
-			picturesService.delTp(pd);																//删除数据库中图片数据
-		}	
+			picturesService.delTp(pd);                                                                //删除数据库中图片数据
+		}
+
 		out.write("success");
 		out.close();
 	}

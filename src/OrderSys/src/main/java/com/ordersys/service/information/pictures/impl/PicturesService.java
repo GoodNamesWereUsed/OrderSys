@@ -3,6 +3,7 @@ package com.ordersys.service.information.pictures.impl;
 import com.ordersys.dao.DaoSupport;
 import com.ordersys.entity.Page;
 import com.ordersys.service.information.pictures.PicturesManager;
+import com.ordersys.service.manage.picture_used_details.Picture_Used_DetailsManager;
 import com.ordersys.util.PageData;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ public class PicturesService implements PicturesManager {
 
 	@Resource(name = "daoSupport")
 	private DaoSupport dao;
+	@Resource(name = "picture_used_detailsService")
+	private Picture_Used_DetailsManager picture_used_detailsService;
 	
 	/**列表
 	 * @param page
@@ -41,6 +44,16 @@ public class PicturesService implements PicturesManager {
 	 * @throws Exception
 	 */
 	public void delete(PageData pd)throws Exception{
+		/**
+		 * notes start
+		 *
+		 * decription :  由于业务需求，在删除图片时,先删除其使用详情
+		 * @Author huangMP
+		 */
+		picture_used_detailsService.deleteByPictureID(pd.getString("PICTURES_ID"));
+		/**
+		 * notes end
+		 */
 		dao.delete("PicturesMapper.delete", pd);
 	}
 	
@@ -66,6 +79,17 @@ public class PicturesService implements PicturesManager {
 	 * @throws Exception
 	 */
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
+
+		/**
+		 * notes start
+		 *
+		 * decription : 由于业务需求，在删除图片时,先删除其使用详情
+		 * @Author huangMP
+		 */
+		picture_used_detailsService.deleteAllByPicturesId(ArrayDATA_IDS);
+		/**
+		 * notes end
+		 */
 		dao.delete("PicturesMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
