@@ -119,17 +119,18 @@
 
 		//保存
 		function save(){
-			if($("#TABLE_ID").val()==""){
+
+			if ($("#TABLE_ID option:selected").attr("value") == null) {
 				$("#TABLE_ID").tips({
 					side:3,
-		            msg:'请输入餐桌号',
+					msg: '请选择餐桌号',
 		            bg:'#AE81FF',
 		            time:2
 		        });
 				$("#TABLE_ID").focus();
 			return false;
 			}
-			if($("#ORDER_STATUS").val()==""){
+			if ($("#ORDER_STATUS option:selected").attr("value") == null) {
 				$("#ORDER_STATUS").tips({
 					side:3,
 		            msg:'请输入订单状态',
@@ -179,7 +180,7 @@
 				$("#ORDER_PRICE").focus();
 			return false;
 			}
-			if($("#ADD_TIME").val()==""){
+			/*			if($("#ADD_TIME").val()==""){
 				$("#ADD_TIME").tips({
 					side:3,
 		            msg:'请输入添加时间',
@@ -188,15 +189,18 @@
 		        });
 				$("#ADD_TIME").focus();
 			return false;
-			}
+			 }*/
+
 			$("#Form").submit();
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
 		}
 		
 		$(function() {
+
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
+
 		});
 		</script>
 </body>

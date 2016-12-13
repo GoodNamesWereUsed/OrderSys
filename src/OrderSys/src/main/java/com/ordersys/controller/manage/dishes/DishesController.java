@@ -4,6 +4,7 @@ import com.ordersys.controller.base.BaseController;
 import com.ordersys.entity.Page;
 import com.ordersys.service.manage.categories.CategoriesManager;
 import com.ordersys.service.manage.dishes.DishesManager;
+import com.ordersys.service.manage.picture_used_details.Picture_Used_DetailsManager;
 import com.ordersys.util.AppUtil;
 import com.ordersys.util.Jurisdiction;
 import com.ordersys.util.ObjectExcelView;
@@ -22,7 +23,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/** 
+/**
  * 说明：菜品管理
  */
 @Controller
@@ -34,6 +35,18 @@ public class DishesController extends BaseController {
 	private DishesManager dishesService;
 	@Resource(name="categoriesService")
 	private CategoriesManager categoriesService;
+	/**
+	 * notes start
+	 * <p/>
+	 * decription : 用于图片详情的增删改查
+	 *
+	 * @Author huangMP
+	 */
+	@Resource(name = "picture_used_detailsService")
+	private Picture_Used_DetailsManager picture_used_detailsService;
+	/**
+	 * notes end
+	 */
 	
 	/**保存
 	 * @param
@@ -46,7 +59,6 @@ public class DishesController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("DISHES_ID", this.get32UUID());	//主键
 		pd.put("ADD_USER",Jurisdiction.getUsername());
 		dishesService.save(pd);
 		mv.addObject("msg","success");
@@ -64,6 +76,18 @@ public class DishesController extends BaseController {
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "del")){return;} //校验权限
 		PageData pd = new PageData();
 		pd = this.getPageData();
+
+		/**
+		 * notes start
+		 *
+		 * decription : 由于业务需求，在删除前，先将其 图片使用详情删除
+		 * @Author huangMP
+		 */
+		picture_used_detailsService.deleteUsedDetailsAndPictureByContentId(pd.getString("DISHES_ID"));
+		/**
+		 * notes end
+		 */
+
 		dishesService.delete(pd);
 		out.write("success");
 		out.close();
@@ -102,14 +126,35 @@ public class DishesController extends BaseController {
 			pd.put("keywords", keywords.trim());
 		}
 		page.setPd(pd);
-		List<PageData>	varList = dishesService.list(page);	//列出Dishes列表
-		for (int i = 0;i < varList.size();i++){
-			String MENU_CATEGORIES_ID = varList.get(i).getString("MENU_CATEGORIES_ID");
-			PageData catePd = new PageData();
-			catePd.put("MENU_CATEGORIES_ID",MENU_CATEGORIES_ID);
-			catePd = categoriesService.findById(catePd);
-			varList.get(i).put("MENU_CATEGORIES_NAME",catePd.getString("MENU_CATEGORIES_NAME"));
+		List<PageData>	varList = dishesService.list(page);    //列出Dishes列表
+		if (0 != varList.size()) {
+			for (int i = 0; i < varList.size(); i++) {
+				String MENU_CATEGORIES_ID = varList.get(i).getString("MENU_CATEGORIES_ID");
+				PageData catePd = new PageData();
+				catePd.put("MENU_CATEGORIES_ID", MENU_CATEGORIES_ID);
+				catePd = categoriesService.findById(catePd);
+				varList.get(i).put("MENU_CATEGORIES_NAME", catePd.getString("MENU_CATEGORIES_NAME"));
+			}
 		}
+
+		/**
+		 * notes start
+		 *
+		 * decription : 由于业务需求，查找时，将其 使用的图片 查找出来
+		 * @param contentId 图片使用详情表的外键 链接到图片表
+		 * @Author huangMP
+		 */
+		if (0 != varList.size()) {
+			for (PageData var : varList) {
+				String contentId = (String) var.get("DISHES_ID");
+				List<PageData> pictureList = picture_used_detailsService.selectPicturesByContentId(contentId);
+				var.put("pictureList", pictureList);
+			}
+		}
+		/**
+		 * notes end
+		 */
+
 		mv.setViewName("manage/dishes/dishes_list");
 		mv.addObject("varList", varList);
 		mv.addObject("pd", pd);
@@ -129,6 +174,19 @@ public class DishesController extends BaseController {
 		List<PageData> varList = categoriesService.findAllCategories(pd);
 		mv.setViewName("manage/dishes/dishes_edit");
 		mv.addObject("msg", "save");
+
+		/**
+		 * notes start
+		 *
+		 * decription : 跳转到新增页面前，把先把主键new出来，并传到前台 (原来是在保存时才new出主键)，需要去保存那里删除主键
+		 * @param
+		 * @Author huangMP
+		 */
+		pd.put("DISHES_ID", this.get32UUID());    //主键
+		/**
+		 * notes end
+		 */
+
 		mv.addObject("pd", pd);
 		mv.addObject("varList",varList);
 		return mv;
@@ -189,6 +247,21 @@ public class DishesController extends BaseController {
 		String DATA_IDS = pd.getString("DATA_IDS");
 		if(null != DATA_IDS && !"".equals(DATA_IDS)){
 			String ArrayDATA_IDS[] = DATA_IDS.split(",");
+
+			/**
+			 * notes start
+			 *
+			 * decription : 由于业务需求，在删除前先将其 图片使用详情删除
+			 * @Author huangMP
+			 */
+
+			for (String id : ArrayDATA_IDS) {
+				picture_used_detailsService.deleteUsedDetailsAndPictureByContentId(id);
+			}
+			/**
+			 * notes end
+			 */
+
 			dishesService.deleteAll(ArrayDATA_IDS);
 			pd.put("msg", "ok");
 		}else{

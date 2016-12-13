@@ -58,6 +58,15 @@
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">菜品分类</th>
 									<th class="center">菜品名称</th>
+									<!--
+                                        notes start
+                                        decription : 在合适的位置 ，展示相应的图片
+                                        @Author huangMP
+                                        -->
+									<th class="center">图片</th>
+									<!--
+                                       notes end
+                                      -->
 									<th class="center">是否推荐菜品</th>
 									<th class="center">状态</th>
 									<th class="center">菜品价格</th>
@@ -79,6 +88,23 @@
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.MENU_CATEGORIES_NAME}</td>
 											<td class='center'>${var.DISHES_NAME}</td>
+											<!--
+												notes start
+												decription : 对齐上面 表头的 “图片的位置” ，展示相应的图片
+												@param pictureList 后台查找得到的图片集合
+												@Author huangMP
+												-->
+											<td class='center'>
+												<c:forEach items="${var.pictureList}" var="i">
+													<a href="<%=basePath%>uploadFiles/uploadImgs/${i.PATH}"
+													   title="${i.TITLE}" class="bwGal"><img
+															src="<%=basePath%>uploadFiles/uploadImgs/${i.PATH}"
+															alt="${i.TITLE}" width="100"></a>
+												</c:forEach>
+											</td>
+											<!--
+                                               notes end
+                                              -->
 											<td class='center'>
 												<c:if test="${var.IS_RECOMMEND == 1}">
 													是

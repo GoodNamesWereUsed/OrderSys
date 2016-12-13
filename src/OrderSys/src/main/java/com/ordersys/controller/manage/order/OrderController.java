@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import com.ordersys.service.manage.picture_used_details.Picture_Used_DetailsManager;
 import com.ordersys.service.manage.table.TableManager;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,8 @@ public class OrderController extends BaseController {
 		Page page = this.getPage();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("ORDER_ID", this.get32UUID());	//主键
+		pd.put("ORDER_ID", this.get32UUID());
+		pd.put("ADD_TIME", new Date());
 		orderService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -114,7 +116,7 @@ public class OrderController extends BaseController {
 		mv.addObject("QX",Jurisdiction.getHC());	//按钮权限
 		return mv;
 	}
-	
+
 	/**去新增页面
 	 * @param
 	 * @throws Exception
@@ -198,7 +200,7 @@ public class OrderController extends BaseController {
 		titles.add("订单状态");	//2
 		titles.add("用餐人数");	//3
 		titles.add("员工编号");	//4
-		titles.add("折扣");	//5
+		titles.add("折扣");        //5
 		titles.add("订单原价");	//6
 		titles.add("添加时间");	//7
 		dataMap.put("titles", titles);

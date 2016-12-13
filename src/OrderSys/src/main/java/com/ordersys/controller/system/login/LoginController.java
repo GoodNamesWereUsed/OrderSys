@@ -298,7 +298,7 @@ public class LoginController extends BaseController {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			pd.put(Const.SESSION_USERNAME, USERNAME);
-			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());//获取角色ID
+			pd.put("ROLE_ID", userService.findByUsername(pd).get("ROLE_ID").toString());//获取角色IDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA}]==
 			pd = roleService.findObjectById(pd);										//获取角色信息														
 			map.put("adds", pd.getString("ADD_QX"));	//增
 			map.put("dels", pd.getString("DEL_QX"));	//删
