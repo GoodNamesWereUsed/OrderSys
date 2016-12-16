@@ -1,0 +1,31 @@
+.c-content table {
+    width: 100%;
+    max-width: 960px;
+    margin: 10px 5px;
+}
+
+.c-content table th,
+.c-content table td {
+    padding: 5px;
+    text-align: center;
+}
+
+.c-content table button {
+    -webkit-user-select: none;
+    background-color: #4CAF50;
+    border: 0px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    outline: none;
+    line-height: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.c-content table button:hover {
+    background-color: #5CB660;
+}
+
+.c-content table button:active {
+    background-color: #459F49;
+}
