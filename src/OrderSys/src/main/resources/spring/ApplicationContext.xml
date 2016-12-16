@@ -121,19 +121,19 @@
 			
 			<property name="filterChainDefinitions">
 				<value>
-				/static/login/** 			= anon
-				/static/js/myjs/** 			= authc
-				/static/js/** 				= anon
-				/uploadFiles/uploadImgs/** 	= anon
-	           	/code.do 					= anon
-	           	/login_login	 			= anon
-	           	/app**/** 					= anon
-	           	/weixin/** 					= anon
-	           	/**							= authc
+					/static/login/** 			= anon
+					/static/js/myjs/** 			= authc
+					/static/js/** 				= anon
+					/uploadFiles/uploadImgs/** 	= anon
+	           		/code.do 					= anon
+	           		/login_login	 			= anon
+	           		/app**/** 					= anon
+	           		/weixin/** 					= anon
+					/login_toLoginDisplay       = anon
+	           		/**							= authc
 				</value>
 			</property>
 		</bean>
 	<!-- ================ Shiro end ================ -->
-	
    
 </beans>
